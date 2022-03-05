@@ -1,0 +1,46 @@
+{% extends "DEIPaperApp/base.html" %}
+{% block content %}
+{% load static %}
+<title>DEI Paper</title>
+<div class = "table-margin">
+   <br>
+   <input class="form-control navbar-fontsize" id="search-bar" type="text" placeholder="Search by ID/name/author">
+   <table class="table table-hover table-borderless table-responsive">
+      <thead>
+         <tr class = "table-header">
+            <th>ID</th>
+            <th>Title</th>
+            <th>Authors</th>
+         </tr>
+      </thead>
+      <tbody id="paper-table">
+         {% for paper in paper_list %}
+            <tr class = "table-entry link-colour paper-info" href="{% url "show_paper" paper.id %}">
+               <td class="link-colour"> {{paper.id}} </td>
+               <td class="link-colour"> {{paper.title}} </td>
+               <td class="link-colour"> {{paper.authors}}</td>
+               <td>
+                  <a href="{% url "update_paper" paper.id %}"><img src="{% static "img/edit.png" %}" class="table-button"></a>
+                  <a href="{% url "delete_paper" paper.id %}" onClick="confirmDeletion()"><img src="{% static "img/delete.png" %}" class="table-button"></a>
+               </td>
+            </tr>
+         {% endfor %}
+      </tbody>
+   </table>
+</div>
+
+<script LANGUAGE="JavaScript">
+   $(document).ready(function(){
+      $("#search-bar").on("keyup", function() {
+         var value = $(this).val().toLowerCase();
+         $("#paper-table tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+         });
+      });
+   });
+   function confirmDeletion(){
+      return confirm("Do you really want to delete this paper from the system?\nThis action is irreversible!");
+   }
+</script>
+
+{% endblock %}

@@ -1,0 +1,71 @@
+.page-background{
+    background: url("../img/background.jpg") center center repeat fixed;
+    color: white;
+}
+
+.navbar-padding, .title-padding{
+    padding: 0% 10%;
+}
+
+.table-margin{
+    margin: 0% 10%;
+}
+
+.navbar-title-fontsize{
+    font-size: min(2.7vw, 30px);
+}
+
+h1{
+    font-size: min(2.7vw, 40px);
+}
+
+.paper-info, h2{
+    font-size: min(2vw, 35px);
+}
+
+.navbar-fontsize, h3{
+    font-size: min(2vw, 20px);
+}
+
+.link-colour{
+    color: white;
+    text-decoration: none;
+}
+
+.link-colour:hover, .link-colour:active{
+    color: rgb(180, 180, 180);
+    text-decoration: none;
+}
+
+.table-header{
+    color: white;
+    font-size: 1.5vw;
+}
+
+.table-entry{
+    color: white;
+    font-size: 1.2vw;
+    vertical-align: middle;
+}
+
+.form-text{
+    color: white;
+    font-size: min(1.5vw, 25px);
+}
+
+.table-button{
+    width: min(1.5vw, 25px);
+}
+
+thead{
+    border-bottom: 0.2vw solid white;
+}
+
+.picture{
+    width: 30vw;
+    max-height: 30vw;
+}
+
+.extra-btn-info{
+    font-size: min(1.5vw, 20px);
+}

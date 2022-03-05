@@ -1,0 +1,47 @@
+{% extends "DEIPaperApp/base.html" %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+<title>New paper</title>
+<h1 class="title-padding"><b>New paper</b></h1>
+<form method="post" class="title-padding">
+    <div class="form-text">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-3">
+                {{ form.title|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                {{ form.abstract|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                {{ form.authors|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                {{ form.logo_url|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                {{ form.doc_url|as_crispy_field }}
+            </div>
+            <div class="col-3">
+            <br><button type="submit" class="btn btn-success extra-btn-info" onClick="return confirmNewPaper()">Submit new paper</button>
+        </div>
+        </div>
+    <div class="bev-info">
+</form>
+
+<script LANGUAGE="JavaScript">
+    function confirmNewPaper(){
+        return confirm("Do you want to add this paper to the system?");
+    }
+</script>
+
+{% endblock %}
