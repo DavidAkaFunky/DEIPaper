@@ -31,7 +31,7 @@ def get_papers(offset: int, lines: int) -> dict:
             pass
     raise DEIPaperError(r.status_code, GET_PAPERS_FAIL, msg_dict = errors)
 
-def get_paper(paper_id) -> dict:
+def get_paper(paper_id: int) -> dict:
     errors = {400: INV_PAPER, 404: INV_PAPER_ID}
     r = requests.get(API_URL,
                      params = {"paperId": paper_id})
@@ -42,7 +42,7 @@ def get_paper(paper_id) -> dict:
             pass
     raise DEIPaperError(r.status_code, GET_PAPER_FAIL, msg_dict = errors)
 
-def post_paper(paper) -> int:
+def post_paper(paper: dict) -> int:
     errors = {400: INV_PAPER, 401: INV_ACC_TOKEN}
     r = requests.post(API_URL,
                       headers = {"Authorization": API_AUTH},
@@ -54,7 +54,7 @@ def post_paper(paper) -> int:
             pass
     raise DEIPaperError(r.status_code, POST_PAPER_FAIL, msg_dict = errors)
 
-def delete_paper(paper_id) -> None:
+def delete_paper(paper_id: int) -> None:
     errors = {400: INV_PAPER_ID, 401: INV_ACC_TOKEN, 403: NO_PERM, 404: PAPER_NOT_FOUND}
     r = requests.delete(API_URL,
                         params = {"paperId": paper_id},
@@ -62,11 +62,12 @@ def delete_paper(paper_id) -> None:
     if not r.ok:
         raise DEIPaperError(r.status_code, DEL_PAPER_FAIL, msg_dict = errors)
 
-def update_paper(paper_id) -> None:
+def update_paper(paper_id: int, paper: dict) -> None:
     errors = {400: INV_PAPER, 403: NO_PERM, 404: PAPER_NOT_FOUND}
     r = requests.put(API_URL,
                      params = {"paperId": paper_id},
-                     headers = {"Authorization": API_AUTH})
+                     headers = {"Authorization": API_AUTH},
+                     json = paper)
     if not r.ok:
         raise DEIPaperError(r.status_code, UPD_PAPER_FAIL, msg_dict = errors)
 

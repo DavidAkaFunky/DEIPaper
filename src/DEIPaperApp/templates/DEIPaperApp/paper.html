@@ -1,0 +1,25 @@
+{% extends "partyApp/basic.html" %}
+{% block content %}
+
+<title>{{bev.designation}}</title>
+<h1 class="title-padding"><b>{{bev.designation}}</b></h1>
+<div class="title-padding">
+    <div class="row">
+        <img src={{bev.imageUrl}} alt={{bev.designation}} class="picture center">
+        <div class="col bev-info">
+            ID: <b>{{bev.id}}</b> <br>
+            Amount in stock: <b>{{bev.amountInStock}}</b> <br>
+            Supplier: <b>{{bev.supplier}}</b> <br>
+            <a href="{% url "update_amount_beverage" bev.id %}" class="btn btn-light extra-btn-info" role="button">Update beverage stock</a> <br>
+            <a href="{% url "delete_beverage" bev.id %}" class="btn btn-danger extra-btn-info" role="button" onClick="return confirmDeletion()">Remove beverage</a>
+        </div>
+    </div>
+</div>
+
+<script LANGUAGE="JavaScript">
+    function confirmDeletion(){
+        return confirm("Do you really want to remove this beverage?\nThis action is irreversible!");
+    }
+</script>
+
+{% endblock %}
