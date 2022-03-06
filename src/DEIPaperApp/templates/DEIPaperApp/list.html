@@ -17,7 +17,7 @@
          {% for paper in paper_list %}
             <tr class = "table-entry link-colour paper-info" href="{% url "show_paper" paper.id %}">
                <td class="link-colour"> {{paper.id}} </td>
-               <td class="link-colour"> {{paper.title}} </td>
+               <td class="link-colour"> <b>{{paper.title}}</b> </td>
                <td class="link-colour"> {{paper.authors}}</td>
                <td>
                   <a href="{% url "update_paper" paper.id %}"><img src="{% static "img/edit.png" %}" class="table-button"></a>

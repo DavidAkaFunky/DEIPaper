@@ -13,29 +13,33 @@
                         <a class="navbar-brand navbar-title-fontsize link-colour" href="/"><b>DEI Paper</b></a>
                     </div>
                     <div class="nav navbar-nav navbar-fontsize">
-                        <a class="active link-colour" href="papers/new"><b>Add new paper</b></a></li>
+                        <a class="active link-colour" href="new"><b>Add new paper</b></a></li>
                     </div>
                 </div>
             </nav>
-            {% if error %}
-                <div class="alert alert-danger" role="alert">
-                    <h4 class="alert-heading">{{msg}}</h4>
-                    <p>Error code: {{code}}</p>
-                </div>
-            {% else %}
-                {% if add_success %}
-                    <div class="alert alert-success" role="alert">
-                        <h4 class="alert-heading">New paper added successfully.</h4>
-                        <p>New paper ID: {{paper_id}}</p>
-                    </div>
-                {% elif del_success %}
-                    <div class="alert alert-success" role="alert">
-                        <h4 class="alert-heading">Paper with the ID {{paper_id}} deleted successfully.</h4>
-                    </div>
-                {% endif %}
-                {% block content %}
-                {% endblock %}
-            {% endif %} 
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == "error" %}
+                        <div class="alert alert-danger altert-dismissable fade show" role="alert">
+                            <p>{{message}}</p>
+                        </div>
+                    {% elif message.tags == "success" %}
+                        <div class="alert alert-success altert-dismissable fade show" role="alert">
+                            <p>{{message}}</p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+            {% block content %}
+            {% endblock %}
         </body>
     </head>
 </html>
+
+<script LANGUAGE="JavaScript">
+    $(document).ready(function() {
+        setTimeout(function() {
+            $(".alert").alert('close');
+        }, 3000);
+    });
+ </script>
