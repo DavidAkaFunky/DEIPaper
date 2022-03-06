@@ -18,24 +18,30 @@
                 </div>
             </nav>
             {% if error %}
-                <div class="alert alert-danger" role="alert">
-                    <h4 class="alert-heading">{{msg}}</h4>
-                    <p>Error code: {{code}}</p>
+                <div class="alert alert-danger altert-dismissable fade show" role="alert">
+                    <h4 class="alert-heading">{{error.msg1}}</h4>
+                    <p>Code {{error.code}}: {{error.msg2}}</p>
                 </div>
-            {% else %}
-                {% if add_success %}
-                    <div class="alert alert-success" role="alert">
-                        <h4 class="alert-heading">New paper added successfully.</h4>
-                        <p>New paper ID: {{paper_id}}</p>
-                    </div>
-                {% elif del_success %}
-                    <div class="alert alert-success" role="alert">
-                        <h4 class="alert-heading">Paper with the ID {{paper_id}} deleted successfully.</h4>
-                    </div>
-                {% endif %}
-                {% block content %}
-                {% endblock %}
-            {% endif %} 
+            {% elif add_success %}
+                <div class="alert alert-success altert-dismissable fade show" role="alert">
+                    <h4 class="alert-heading">New paper added successfully.</h4>
+                    <p>New paper ID: {{paper_id}}</p>
+                </div>
+            {% elif del_success %}
+                <div class="alert alert-success" role="alert">
+                    <h4 class="alert-heading">Paper with the ID {{paper_id}} deleted successfully.</h4>
+                </div>
+            {% endif %}
+            {% block content %}
+            {% endblock %}
         </body>
     </head>
 </html>
+
+<script LANGUAGE="JavaScript">
+    $(document).ready(function() {
+        setTimeout(function() {
+            $(".alert").alert('close');
+        }, 5000);
+    });
+ </script>

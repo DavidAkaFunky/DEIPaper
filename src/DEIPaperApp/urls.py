@@ -19,8 +19,9 @@ from django.shortcuts import redirect
 from . import views
 
 urlpatterns = [
-    path("", views.main_page, name = "index"),
-    path("papers/", views.main_page, name = "list_papers"),
+    path("", lambda _: redirect("papers/"), name = "index"),
+    path("papers/", views.list_papers, name = "list_papers_main"),
+    path("papers/page=<int:page>&lines=<int:lines>", views.list_papers, name = "list_papers"),
     path("papers/new", views.new_paper, name = "new_paper"),
     path("paper/<int:paper_id>", views.show_paper, name = "show_paper"),
     path("paper/<int:paper_id>/update", views.update_paper, name = "update_paper"),
