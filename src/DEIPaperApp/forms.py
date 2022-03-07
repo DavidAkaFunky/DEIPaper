@@ -18,8 +18,8 @@ class UpdatePaperForm (forms.Form):
     title = forms.CharField(label = "Title", required = False)
     abstract = forms.CharField(label = "Abstract", required = False)
     authors = forms.CharField(label = "Authors", required = False)
-    logo_url = forms.URLField(label = "Logo URL", required = False)
-    doc_url = forms.URLField(label = "Document URL", required = False)
+    logoUrl = forms.URLField(label = "Logo URL", required = False)
+    docUrl = forms.URLField(label = "Document URL", required = False)
 
     def update_json(self, paper):
         new_data = self.cleaned_data

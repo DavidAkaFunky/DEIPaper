@@ -5,37 +5,17 @@
 <title>New paper</title>
 <h1 class="title-padding"><b>New paper</b></h1>
 <form method="post" class="title-padding">
-    <div class="form-text">
+    <div class="d-flex flex-column justify-content-start">
         {% csrf_token %}
-        <div class="row">
-            <div class="col-3">
-                {{ form.title|as_crispy_field }}
-            </div>
+        {{ form.title|as_crispy_field }}
+        {{ form.abstract|as_crispy_field }}
+        {{ form.authors|as_crispy_field }}
+        {{ form.logoUrl|as_crispy_field }}
+        <div class="flex-row">
+            {{ form.docUrl|as_crispy_field }}
+            <button type="submit" class="btn btn-success" onClick="return confirmNewPaper()">Submit new paper</button>
         </div>
-        <div class="row">
-            <div class="col-3">
-                {{ form.abstract|as_crispy_field }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                {{ form.authors|as_crispy_field }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                {{ form.logo_url|as_crispy_field }}
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                {{ form.doc_url|as_crispy_field }}
-            </div>
-            <div class="col-3">
-            <br><button type="submit" class="btn btn-success extra-btn-info" onClick="return confirmNewPaper()">Submit new paper</button>
-        </div>
-        </div>
-    <div class="bev-info">
+    </div>
 </form>
 
 <script LANGUAGE="JavaScript">

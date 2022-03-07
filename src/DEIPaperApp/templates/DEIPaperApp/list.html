@@ -1,32 +1,61 @@
 {% extends "DEIPaperApp/base.html" %}
 {% block content %}
 {% load static %}
+{% load mathfilters %}
 <title>DEI Paper</title>
-<div class = "table-margin">
-   <br>
-   <input class="form-control navbar-fontsize" id="search-bar" type="text" placeholder="Search by ID/name/author">
-   <table class="table table-hover table-borderless table-responsive">
-      <thead>
-         <tr class = "table-header">
-            <th>ID</th>
-            <th>Title</th>
-            <th>Authors</th>
-         </tr>
-      </thead>
-      <tbody id="paper-table">
-         {% for paper in paper_list %}
-            <tr class = "table-entry link-colour paper-info" href="{% url "show_paper" paper.id %}">
-               <td class="link-colour"> {{paper.id}} </td>
-               <td class="link-colour"> <b>{{paper.title}}</b> </td>
-               <td class="link-colour"> {{paper.authors}}</td>
-               <td>
-                  <a href="{% url "update_paper" paper.id %}"><img src="{% static "img/edit.png" %}" class="table-button"></a>
-                  <a href="{% url "delete_paper" paper.id %}" onClick="confirmDeletion()"><img src="{% static "img/delete.png" %}" class="table-button"></a>
-               </td>
-            </tr>
+<div class="table-margin">
+   <div class="d-flex col-md-1 col-sm-2 justify-content-between">
+      <ul class="pagination table-entry-title">
+         <b> Page number </b> 
+         <br>
+         {% for i in pages %}
+            <li class="page-item"><a class="btn btn-light" href="{% url "list_papers" offset|mul:i|sub:offset lines%}" >{{i}}</a></li>
          {% endfor %}
-      </tbody>
-   </table>
+         {% if page > 5 %}
+            <li class="page-item"><a class="btn btn-light" role="button"><b>...</b></a></li>
+         {% endif %}
+            <li class="page-item active"><a class="btn btn-dark" role="button"><b>{{page}}</b></a></li>
+         {% if has_next_page %}
+            <li class="page-item"><a href="{% url "list_papers" offset|add:lines lines %}" class="btn btn-light" role="button"><b>Next page ({{page|add:"1"}})</b></a></li>
+         {% endif %}
+      </ul>
+      <ul class="pagination table-entry-title">
+         <b> Papers per page </b>
+         <br>
+         {% for size in size_options %}
+            {% if size == lines %}
+               <li class="page-item"><a class="btn btn-dark" role="button">{{size}}</a></li>
+            {% else %}
+               <li class="page-item"><a href="{% url "list_papers" offset size %}" class="btn btn-light" role="button">{{size}}</a></li>
+            {% endif %}
+         {% endfor %}
+      </ul>
+   </div>
+   <input class="form-control navbar-fontsize" id="search-bar" type="text" placeholder="Search by ID/name/author">
+   <div class="table-responsive">
+      <table class="table table-hover table-borderless">
+         <thead>
+            <tr class="table-header">
+               <th>ID</th>
+               <th>Title</th>
+               <th>Authors</th>
+            </tr>
+         </thead>
+         <tbody id="paper-table">
+            {% for paper in paper_list %}
+               <tr class="paper-info">
+                  <td class = "table-entry"> {{paper.id}} </td>
+                  <td class = "table-entry-title"> <a href="{% url "show_paper" paper.id %}"> <b>{{paper.title}}</b> </a> </td>
+                  <td class = "table-entry"> {{paper.authors}}</td>
+                  <td>
+                     <a href="{% url "update_paper" paper.id %}"><img src="{% static "img/edit.png" %}" class="table-button"></a>
+                     <a href="{% url "delete_paper" paper.id %}" onClick="confirmDeletion()"><img src="{% static "img/delete.png" %}" class="table-button"></a>
+                  </td>
+               </tr>
+            {% endfor %}
+         </tbody>
+      </table>
+   </div>
 </div>
 
 <script LANGUAGE="JavaScript">

@@ -33,8 +33,7 @@ def get_papers(offset: int, lines: int) -> dict:
 
 def get_paper(paper_id: int) -> dict:
     errors = {400: INV_PAPER, 404: INV_PAPER_ID}
-    r = requests.get(API_URL,
-                     params = {"paperId": paper_id})
+    r = requests.get(API_URL + str(paper_id))
     if r.ok:
         try:
             return r.json()
@@ -56,16 +55,14 @@ def post_paper(paper: dict) -> int:
 
 def delete_paper(paper_id: int) -> None:
     errors = {400: INV_PAPER_ID, 401: INV_ACC_TOKEN, 403: NO_PERM, 404: PAPER_NOT_FOUND}
-    r = requests.delete(API_URL,
-                        params = {"paperId": paper_id},
+    r = requests.delete(API_URL + str(paper_id),
                         headers = {"Authorization": API_AUTH})
     if not r.ok:
         raise DEIPaperError(r.status_code, DEL_PAPER_FAIL, msg_dict = errors)
 
 def update_paper(paper_id: int, paper: dict) -> None:
     errors = {400: INV_PAPER, 403: NO_PERM, 404: PAPER_NOT_FOUND}
-    r = requests.put(API_URL,
-                     params = {"paperId": paper_id},
+    r = requests.put(API_URL + str(paper_id),
                      headers = {"Authorization": API_AUTH},
                      json = paper)
     if not r.ok:

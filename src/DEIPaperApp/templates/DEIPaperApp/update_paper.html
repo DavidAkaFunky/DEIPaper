@@ -1,36 +1,55 @@
-{% extends "partyApp/basic.html" %}
+{% extends "DEIPaperApp/base.html" %}
 {% block content %}
 {% load crispy_forms_tags %}
 
-<title>{{bev.designation}}</title>
-<h1 class="title-padding"><b>{{bev.designation}}</b></h1>
+<title>{{paper.title}}</title>
+<h1 class="title-padding"><b>{{paper.title}}</b></h1>
 <div class="title-padding">
     <div class="row">
-        <img src={{bev.imageUrl}} alt={{bev.designation}} class="picture center">          
-        <div class="col bev-info">
-            <b>Update amount in stock</b><br>
-            Current amount in stock: <b>{{bev.amountInStock}}</b><br>
-            <div class="col form-text">
-                <form action={% url 'update_amount_beverage' bev.id %} method="post">
-                    {% csrf_token %}
+        {% if paper.logoUrl %}
+            <img src={{paper.logoUrl}} alt={{paper.title}} class="picture"> 
+        {% endif %}    
+        <div class="col form-text">
+            <form action={% url "update_paper" paper.id %} method="post">
+                {% csrf_token %}
+                <div class="row">
                     <div class="row">
-                        <div class="col">
-                            {{ form.amount_in_stock|as_crispy_field }}
-                        </div>
-                        <div class="col">
-                            <br><button type="submit" class="btn btn-success extra-btn-info" onClick="return confirmUpdate({{bev.amountInStock}})">Update</button>
+                        <div class="col-3">
+                            {{ form.title|as_crispy_field }}
                         </div>
                     </div>
-                </form>
-            </div>
+                    <div class="row">
+                        <div class="col-3">
+                            {{ form.abstract|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            {{ form.authors|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            {{ form.logoUrl|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-3">
+                            {{ form.docUrl|as_crispy_field }}
+                        </div>
+                    </div>
+                    <div class="col">
+                        <br><button type="submit" class="btn btn-success" onClick="return confirmUpdate()">Update paper</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
 
 <script LANGUAGE="JavaScript">
-    function confirmUpdate(cur_amount){
-        var new_amount = document.getElementById("id_amount_in_stock").value;
-        return confirm("Current amount: " + cur_amount + "\nNew amount: " + new_amount + "\nDo you confirm the update?");
+    function confirmUpdate(){
+        return confirm("Do you confirm the update on this paper?");
     }
 </script>
 

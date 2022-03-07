@@ -27,28 +27,39 @@ h1{
     font-size: min(2vw, 20px);
 }
 
-.link-colour{
+a{
     color: white;
     text-decoration: none;
 }
 
-.link-colour:hover, .link-colour:active{
+a:hover, a:active{
     color: rgb(180, 180, 180);
     text-decoration: none;
 }
 
 .table-header{
     color: white;
-    font-size: 1.5vw;
+    font-size: min(4vw, 25px);
+}
+
+.table-entry-title{
+    color: white;
+    font-size: max(1.2vw, 15px);
+    vertical-align: middle;
+}
+
+.btn{
+    font-size: max(1vw, 10px);
+    vertical-align: middle;
 }
 
 .table-entry{
     color: white;
-    font-size: 1.2vw;
+    font-size: max(1vw, 10px);
     vertical-align: middle;
 }
 
-.form-text{
+form{
     color: white;
     font-size: min(1.5vw, 25px);
 }
@@ -62,10 +73,6 @@ thead{
 }
 
 .picture{
-    width: 30vw;
+    max-width: 30vw;
     max-height: 30vw;
-}
-
-.extra-btn-info{
-    font-size: min(1.5vw, 20px);
 }
