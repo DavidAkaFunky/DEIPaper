@@ -24,5 +24,6 @@ class UpdatePaperForm (forms.Form):
     def update_json(self, paper):
         new_data = self.cleaned_data
         for key in new_data:
-            paper[key] = new_data[key]
+            if new_data[key] != "":
+                paper[key] = new_data[key]
         return paper

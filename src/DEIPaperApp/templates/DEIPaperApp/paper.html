@@ -1,24 +1,32 @@
 {% extends "DEIPaperApp/base.html" %}
 {% block content %}
 
-<title>{{paper.title}}</title>
-<h1 class="title-padding"><b>{{paper.designation}}</b></h1>
-<div class="title-padding">
+<title>"{{paper.title}}"</title>
+<h1 class="padding"><b>{{paper.title}}</b></h1>
+<div class="padding">
     <div class="row">
-        {% if paper.imageUrl %} 
-            <img src={{paper.imageUrl}} alt={{paper.designation}} class="picture">
+        {% if paper.logoUrl %}
+            <div class="col-xl-4 center">
+                <img src={{paper.logoUrl}} alt={{paper.title}}>
+            </div>
         {% endif %}
         <div class="col paper-info">
-            ID: <b>{{paper.id}}</b> <br>
             <h2> <b>Abstract</b> </h2>
             {{paper.abstract}}
             <br>
-            {% if paper.docUrl %}
-                <a href={{paper.docUrl}} class="btn btn-light" role="button">Document URL</a>
-            {% endif %}
-            <br>
-            <a href="{% url "update_paper" paper.id %}" class="btn btn-light" role="button">Update paper</a> <br>
-            <a href="{% url "delete_paper" paper.id %}" class="btn btn-danger" role="button" onClick="return confirmDeletion()">Remove paper</a>
+            <div class="row">
+                {% if paper.docUrl %}
+                    <div class="col paper-info justify-content-center">
+                        <a href={{paper.docUrl}} class="btn btn-light" role="button">Document URL</a>
+                    </div>
+                {% endif %}
+                <div class="col paper-info justify-content-center">
+                    <a href="{% url "update_paper" paper.id %}" class="btn btn-light" role="button">Update paper</a>
+                </div>
+                <div class="col paper-info justify-content-center">
+                    <a href="{% url "delete_paper" paper.id %}" class="btn btn-danger" role="button" onClick="return confirmDeletion()">Remove paper</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>

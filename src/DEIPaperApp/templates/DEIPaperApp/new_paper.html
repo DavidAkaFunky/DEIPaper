@@ -3,17 +3,28 @@
 {% load crispy_forms_tags %}
 
 <title>New paper</title>
-<h1 class="title-padding"><b>New paper</b></h1>
-<form method="post" class="title-padding">
-    <div class="d-flex flex-column justify-content-start">
-        {% csrf_token %}
-        {{ form.title|as_crispy_field }}
-        {{ form.abstract|as_crispy_field }}
-        {{ form.authors|as_crispy_field }}
-        {{ form.logoUrl|as_crispy_field }}
-        <div class="flex-row">
+<h1 class="padding"><b>New paper</b></h1>
+<form method="post" class="padding">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-lg-6">
+            {{ form.title|as_crispy_field }}
+        </div>
+        <div class="col-lg-6">
+            {{ form.abstract|as_crispy_field }}
+        </div>
+        <div class="col-lg-6">
+            {{ form.authors|as_crispy_field }}
+        </div>
+        <div class="col-lg-6">
+            {{ form.logoUrl|as_crispy_field }}
+        </div>
+        <div class="col-lg-6">
             {{ form.docUrl|as_crispy_field }}
-            <button type="submit" class="btn btn-success" onClick="return confirmNewPaper()">Submit new paper</button>
+        </div>
+        <div class="col-lg-6">
+            All fields with * must be filled.
+            <br> <button type="submit" class="btn btn-success" onClick="return confirmNewPaper()">Submit new paper</button>
         </div>
     </div>
 </form>

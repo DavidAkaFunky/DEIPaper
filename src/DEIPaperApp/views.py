@@ -7,7 +7,7 @@ from . import papers, forms
 def list_papers(request: HttpRequest, offset = 0, lines = 10) -> HttpResponse:
     """Show a page with a list containing a
     maximum of the given amount of papers."""
-    size_options = (5, 10, 20, 50)
+    size_options = (50, 20, 10, 5)
     if lines not in size_options:
         # Restrict size options to those explicitly provided
         return redirect(f"/DEIPaper/papers/offset={offset}&lines=10")
@@ -54,28 +54,27 @@ def new_paper(request: HttpRequest) -> HttpResponse:
     else:
         form = forms.NewPaperForm()
 
-    # TO-DO: Make it 
     return render(request, "DEIPaperApp/new_paper.html", {"form": form})
 
-def show_paper(request, paper_id):
+def show_paper(request: HttpRequest, paper_id: int) -> HttpResponse:
     """Show a paper from the
     ISTPaper system given its ID."""
     try:
         paper = papers.get_paper(paper_id)
-        print(paper)
         return render(request, "DEIPaperApp/paper.html", {"paper": paper})
     except papers.DEIPaperError as e:
         return e.show_error(request)
 
-def update_paper(request, paper_id):
+def update_paper(request: HttpRequest, paper_id) -> HttpResponse:
     """Update paper from the
     ISTPaper system given its ID."""
-    if request.method == "PUT":
-        form = forms.UpdatePaperForm(request.PUT)
+    if request.method == "POST":
+        form = forms.UpdatePaperForm(request.POST)
         if form.is_valid():
             try:
                 paper = papers.get_paper(paper_id) # This might be unnecessary...
-                papers.update_paper(paper_id, form.update_json(paper))
+                form.update_json(paper)
+                papers.update_paper(paper_id, paper)
                 messages.success(request, f"Paper with the ID {paper_id} updated successfully.")
                 return render(request, "DEIPaperApp/paper.html", {"paper": paper})
             except papers.DEIPaperError as e:

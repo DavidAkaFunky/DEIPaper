@@ -3,28 +3,20 @@
     color: white;
 }
 
-.navbar-padding, .title-padding{
+.padding{
     padding: 0% 10%;
 }
 
-.table-margin{
-    margin: 0% 10%;
+.navbar-title-fontsize, h1{
+    font-size: min(5vw, 35px);
 }
 
-.navbar-title-fontsize{
-    font-size: min(2.7vw, 30px);
+h2{
+    font-size: min(4vw, 35px);
 }
 
-h1{
-    font-size: min(2.7vw, 40px);
-}
-
-.paper-info, h2{
-    font-size: min(2vw, 35px);
-}
-
-.navbar-fontsize, h3{
-    font-size: min(2vw, 20px);
+.navbar-fontsize, .paper-info, h3{
+    font-size: min(3.5vw, 20px);
 }
 
 a{
@@ -39,40 +31,45 @@ a:hover, a:active{
 
 .table-header{
     color: white;
-    font-size: min(4vw, 25px);
+    font-size: min(3.5vw, 25px);
 }
 
 .table-entry-title{
     color: white;
-    font-size: max(1.2vw, 15px);
-    vertical-align: middle;
-}
-
-.btn{
-    font-size: max(1vw, 10px);
+    font-size: min(3.2vw, 25px);
     vertical-align: middle;
 }
 
 .table-entry{
     color: white;
-    font-size: max(1vw, 10px);
+    font-size: min(3vw, 20px);
+    vertical-align: middle;
+}
+
+.table-button{
+    width: min(3.2vw, 25px);
+    vertical-align: middle;
+}
+
+.btn{
+    font-size: min(3vw, 20px);
     vertical-align: middle;
 }
 
 form{
     color: white;
-    font-size: min(1.5vw, 25px);
-}
-
-.table-button{
-    width: min(1.5vw, 25px);
+    font-size: min(3.2vw, 25px);
 }
 
 thead{
     border-bottom: 0.2vw solid white;
 }
 
-.picture{
-    max-width: 30vw;
-    max-height: 30vw;
+img{
+    max-width: max(25vw, 250px);
+    max-height: max(25vw, 250px);
+}
+
+.center{
+    text-align: center;
 }

@@ -65,6 +65,7 @@ def update_paper(paper_id: int, paper: dict) -> None:
     r = requests.put(API_URL + str(paper_id),
                      headers = {"Authorization": API_AUTH},
                      json = paper)
+    print("Status code:", r.status_code)
     if not r.ok:
         raise DEIPaperError(r.status_code, UPD_PAPER_FAIL, msg_dict = errors)
 

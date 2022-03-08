@@ -2,50 +2,31 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-<title>{{paper.title}}</title>
-<h1 class="title-padding"><b>{{paper.title}}</b></h1>
-<div class="title-padding">
+<title>Update "{{paper.title}}"</title>
+<h1 class="padding"><b>Update "{{paper.title}}"</b></h1>
+<form method="post" class="padding">
+    {% csrf_token %}
     <div class="row">
-        {% if paper.logoUrl %}
-            <img src={{paper.logoUrl}} alt={{paper.title}} class="picture"> 
-        {% endif %}    
-        <div class="col form-text">
-            <form action={% url "update_paper" paper.id %} method="post">
-                {% csrf_token %}
-                <div class="row">
-                    <div class="row">
-                        <div class="col-3">
-                            {{ form.title|as_crispy_field }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            {{ form.abstract|as_crispy_field }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            {{ form.authors|as_crispy_field }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            {{ form.logoUrl|as_crispy_field }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            {{ form.docUrl|as_crispy_field }}
-                        </div>
-                    </div>
-                    <div class="col">
-                        <br><button type="submit" class="btn btn-success" onClick="return confirmUpdate()">Update paper</button>
-                    </div>
-                </div>
-            </form>
+        <div class="col-lg-6">
+            {{ form.title|as_crispy_field }}
+        </div>
+        <div class="col-lg-6">
+            {{ form.abstract|as_crispy_field }}
+        </div>
+        <div class="col-lg-6">
+            {{ form.authors|as_crispy_field }}
+        </div>
+        <div class="col-lg-6">
+            {{ form.logoUrl|as_crispy_field }}
+        </div>
+        <div class="col-lg-6">
+            {{ form.docUrl|as_crispy_field }}
+        </div>
+        <div class="col-lg-6">
+            <br><button type="submit" class="btn btn-success" onClick="return confirmUpdate()">Update paper</button>
         </div>
     </div>
-</div>
+</form>
 
 <script LANGUAGE="JavaScript">
     function confirmUpdate(){
