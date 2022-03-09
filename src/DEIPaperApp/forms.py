@@ -1,8 +1,10 @@
+"""This file is dedicated to the paper addition and update forms."""
+
 from django import forms
 
 class NewPaperForm (forms.Form):
     title = forms.CharField(label = "Title")
-    abstract = forms.CharField(label = "Abstract")
+    abstract = forms.CharField(label = "Abstract", widget = forms.Textarea)
     authors = forms.CharField(label = "Authors")
     logoUrl = forms.URLField(label = "Logo URL", required = False)
     docUrl = forms.URLField(label = "Document URL", required = False)
@@ -16,7 +18,7 @@ class NewPaperForm (forms.Form):
 
 class UpdatePaperForm (forms.Form):
     title = forms.CharField(label = "Title", required = False)
-    abstract = forms.CharField(label = "Abstract", required = False)
+    abstract = forms.CharField(label = "Abstract", widget = forms.Textarea, required = False)
     authors = forms.CharField(label = "Authors", required = False)
     logoUrl = forms.URLField(label = "Logo URL", required = False)
     docUrl = forms.URLField(label = "Document URL", required = False)

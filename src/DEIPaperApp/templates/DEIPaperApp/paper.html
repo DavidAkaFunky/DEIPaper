@@ -1,29 +1,32 @@
 {% extends "DEIPaperApp/base.html" %}
 {% block content %}
 
-<title>"{{paper.title}}"</title>
-<h1 class="padding"><b>{{paper.title}}</b></h1>
+<title>"DEIPaper - {{paper.title}}"</title>
+<div class="upper-padding">
+    <h1 class="padding"><b>{{paper.title}}</b></h1>
+</div>
 <div class="padding">
-    <div class="row">
+    <div class="row upper-margin">
         {% if paper.logoUrl %}
             <div class="col-xl-4 center">
                 <img src={{paper.logoUrl}} alt={{paper.title}}>
             </div>
         {% endif %}
         <div class="col paper-info">
-            <h2> <b>Abstract</b> </h2>
+            <h2 class="upper-padding"><b>Authors</b></h2>
+            {{paper.authors}}
+            <h2 class="upper-padding"><b>Abstract</b></h2>
             {{paper.abstract}}
-            <br>
-            <div class="row">
+            <div class="row upper-padding">
                 {% if paper.docUrl %}
-                    <div class="col paper-info justify-content-center">
+                    <div class="col paper-info center">
                         <a href={{paper.docUrl}} class="btn btn-light" role="button">Document URL</a>
                     </div>
                 {% endif %}
-                <div class="col paper-info justify-content-center">
-                    <a href="{% url "update_paper" paper.id %}" class="btn btn-light" role="button">Update paper</a>
+                <div class="col paper-info center">
+                    <a href="{% url "update_paper" paper.id %}" class="btn btn-light" role="button">Update information</a>
                 </div>
-                <div class="col paper-info justify-content-center">
+                <div class="col paper-info center">
                     <a href="{% url "delete_paper" paper.id %}" class="btn btn-danger" role="button" onClick="return confirmDeletion()">Remove paper</a>
                 </div>
             </div>

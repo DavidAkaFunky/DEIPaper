@@ -2,31 +2,19 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-<title>New paper</title>
-<h1 class="padding"><b>New paper</b></h1>
-<form method="post" class="padding">
+<title>DEIPaper - New paper</title>
+<div class="upper-padding">
+    <h1 class="padding"><b>New paper</b></h1>
+</div>
+<form method="post" class="padding paper-info">
     {% csrf_token %}
-    <div class="row">
-        <div class="col-lg-6">
-            {{ form.title|as_crispy_field }}
-        </div>
-        <div class="col-lg-6">
-            {{ form.abstract|as_crispy_field }}
-        </div>
-        <div class="col-lg-6">
-            {{ form.authors|as_crispy_field }}
-        </div>
-        <div class="col-lg-6">
-            {{ form.logoUrl|as_crispy_field }}
-        </div>
-        <div class="col-lg-6">
-            {{ form.docUrl|as_crispy_field }}
-        </div>
-        <div class="col-lg-6">
-            All fields with * must be filled.
-            <br> <button type="submit" class="btn btn-success" onClick="return confirmNewPaper()">Submit new paper</button>
-        </div>
-    </div>
+    {{ form.title|as_crispy_field }}
+    {{ form.abstract|as_crispy_field }}
+    {{ form.authors|as_crispy_field }}
+    {{ form.logoUrl|as_crispy_field }}
+    {{ form.docUrl|as_crispy_field }}
+    All fields with * must be filled.
+    <br><button type="submit" class="btn btn-success" onClick="return confirmNewPaper()">Submit new paper</button>
 </form>
 
 <script LANGUAGE="JavaScript">

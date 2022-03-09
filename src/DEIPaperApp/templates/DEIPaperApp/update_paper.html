@@ -2,9 +2,11 @@
 {% block content %}
 {% load crispy_forms_tags %}
 
-<title>Update "{{paper.title}}"</title>
-<h1 class="padding"><b>Update "{{paper.title}}"</b></h1>
-<form method="post" class="padding">
+<title>DEIPaper - Update "{{paper.title}}"</title>
+<div class="upper-padding">
+    <h1 class="padding"><b>Update "{{paper.title}}"</b></h1>
+</div>
+<form method="post" class="padding paper-info">
     {% csrf_token %}
     <div class="row">
         <div class="col-lg-6">

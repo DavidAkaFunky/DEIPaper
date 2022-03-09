@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-d(!h%j@)ry*xjs8#09mpe-juxmb@jym3)qki00_q8acn-labqs
 # SECURITY WARNING: don"t run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
 
 
 # Application definition
@@ -35,7 +35,6 @@ INSTALLED_APPS = [
     "DEIPaperApp.apps.DEIPaperAppConfig",
     "crispy_forms",
     "mathfilters",
-    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -79,6 +78,7 @@ WSGI_APPLICATION = "DEIPaper.wsgi.application"
 
 DATABASES = {}
 
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
