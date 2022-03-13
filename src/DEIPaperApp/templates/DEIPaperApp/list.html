@@ -3,21 +3,8 @@
 {% load static %}
 {% load mathfilters %}
 <title>DEI Paper</title>
-<div class="padding">
-   <div class="pagination table-entry-title justify-content-center upper-padding">
-      {% for size in size_options %}
-         {% if size == lines %}
-            <div class="page-item active">
-               <a class="btn btn-dark" role="button"><b>{{size}} entries/page</b></a>
-            </div>
-         {% else %}
-            <div class="page-item">
-               <a href="{% url "list_papers" offset size %}" class="btn btn-light" role="button">{{size}}</a>
-            </div>
-         {% endif %}
-      {% endfor %}
-   </div>
-   <div class="upper-padding">
+<div class="horizontal-padding">
+   <div class="vertical-padding">
       <input class="form-control navbar-fontsize" id="search-bar" type="text" placeholder="Search by ID/name/author">
       <table class="table table-responsive table-hover table-borderless table-striped">
          <thead>
@@ -35,14 +22,14 @@
                   <td class="table-entry">{{paper.authors}}</td>
                   <td>
                      <a href="{% url "update_paper" paper.id %}"><img src="{% static "img/edit.png" %}" class="table-button mb-2"></a>
-                     <a href="{% url "delete_paper" paper.id %}" onClick="confirlgeletion()"><img src="{% static "img/delete.png" %}" class="table-button"></a>
+                     <a href="{% url "delete_paper" paper.id %}" onClick="return confirmDeletion()"><img src="{% static "img/delete.png" %}" class="table-button"></a>
                   </td>
                </tr>
             {% endfor %}
          </tbody>
       </table>
    </div>
-   <div class="pagination table-entry-title justify-content-center upper-padding">
+   <div class="pagination table-entry-title justify-content-center vertical-padding">
       {% for i in first_pages %}
          {% if i == page|sub:"1" %}
             <div class="page-item">
@@ -73,6 +60,19 @@
          </div>
       {% endif %}
    </div>
+   <div class="pagination table-entry-title justify-content-center vertical-padding">
+      {% for size in size_options %}
+         {% if size == lines %}
+            <div class="page-item active">
+               <a class="btn btn-dark" role="button"><b>{{size}} entries/page</b></a>
+            </div>
+         {% else %}
+            <div class="page-item">
+               <a href="{% url "list_papers" offset size %}" class="btn btn-light" role="button">{{size}}</a>
+            </div>
+         {% endif %}
+      {% endfor %}
+   </div>
 </div>
 
 <script LANGUAGE="JavaScript">
@@ -85,7 +85,7 @@
       });
    });
    function confirmDeletion(){
-      return confirm("Do you really want to delete this paper from the system?\nThis action is irreversible!");
+      return confirm("Do you really want to remove this paper from the system?\nThis action is irreversible!");
    }
 </script>
 

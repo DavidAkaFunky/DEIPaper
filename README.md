@@ -1,6 +1,6 @@
 # DEIPaper
 
-By: David Belchior - Instituto Superior Técnico - LEIC-A - Nº 95550
+By: **David Belchior** - Instituto Superior Técnico - LEIC-A - Nº 95550
 
 ## Dependencies
 

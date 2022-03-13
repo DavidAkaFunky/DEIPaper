@@ -1,42 +1,57 @@
 {% extends "DEIPaperApp/base.html" %}
 {% block content %}
 
-<title>"DEIPaper - {{paper.title}}"</title>
-<div class="upper-padding">
-    <h1 class="padding"><b>{{paper.title}}</b></h1>
+<title>DEIPaper - "{{paper.title}}"</title>
+<div class="vertical-padding">
+    <h1 class="horizontal-padding"><b>{{paper.title}}</b></h1>
 </div>
-<div class="padding">
+<div class="horizontal-padding">
     <div class="row upper-margin">
         {% if paper.logoUrl %}
-            <div class="col-xl-4 center">
-                <img src={{paper.logoUrl}} alt={{paper.title}}>
+            <div class="col-xl-4 center vertical-padding">
+                <img class="vertical-padding" src={{paper.logoUrl}} alt={{paper.title}}>
+                <div class="row vertical-padding">
+                    {% if paper.docUrl %}
+                        <div class="col paper-info center vertical-padding">
+                            <a href={{paper.docUrl}} class="btn btn-light" role="button">Document URL</a>
+                        </div>
+                    {% endif %}
+                    <div class="col paper-info center vertical-padding">
+                        <a href="{% url "update_paper" paper.id %}" class="btn btn-light" role="button">Update information</a>
+                    </div>
+                    <div class="col paper-info center vertical-padding">
+                        <a href="{% url "delete_paper" paper.id %}" class="btn btn-danger" role="button" onClick="return confirmDeletion()">Remove paper</a>
+                    </div>
+                </div>
             </div>
         {% endif %}
         <div class="col paper-info">
-            <h2 class="upper-padding"><b>Authors</b></h2>
-            {{paper.authors}}
-            <h2 class="upper-padding"><b>Abstract</b></h2>
-            {{paper.abstract}}
-            <div class="row upper-padding">
-                {% if paper.docUrl %}
+            {% if not paper.logoUrl%}
+                <div class="row vertical-padding">
+                    {% if paper.docUrl %}
+                        <div class="col paper-info center">
+                            <a href={{paper.docUrl}} class="btn btn-light" role="button">Document URL</a>
+                        </div>
+                    {% endif %}
                     <div class="col paper-info center">
-                        <a href={{paper.docUrl}} class="btn btn-light" role="button">Document URL</a>
+                        <a href="{% url "update_paper" paper.id %}" class="btn btn-light" role="button">Update information</a>
                     </div>
-                {% endif %}
-                <div class="col paper-info center">
-                    <a href="{% url "update_paper" paper.id %}" class="btn btn-light" role="button">Update information</a>
+                    <div class="col paper-info center">
+                        <a href="{% url "delete_paper" paper.id %}" class="btn btn-danger" role="button" onClick="return confirmDeletion()">Remove paper</a>
+                    </div>
                 </div>
-                <div class="col paper-info center">
-                    <a href="{% url "delete_paper" paper.id %}" class="btn btn-danger" role="button" onClick="return confirmDeletion()">Remove paper</a>
-                </div>
-            </div>
+            {% endif %}
+            <h2 class="vertical-padding"><b>Authors</b></h2>
+            {{paper.authors}}
+            <h2 class="vertical-padding"><b>Abstract</b></h2>
+            {{paper.abstract}}
         </div>
     </div>
 </div>
 
 <script LANGUAGE="JavaScript">
     function confirmDeletion(){
-        return confirm("Do you really want to remove this paper?\nThis action is irreversible!");
+        return confirm("Do you really want to remove this paper from the system?\nThis action is irreversible!");
     }
 </script>
 

@@ -3,31 +3,18 @@
 {% load crispy_forms_tags %}
 
 <title>DEIPaper - Update "{{paper.title}}"</title>
-<div class="upper-padding">
-    <h1 class="padding"><b>Update "{{paper.title}}"</b></h1>
+<div class="vertical-padding">
+    <h1 class="horizontal-padding"><b>Update "{{paper.title}}"</b></h1>
 </div>
-<form method="post" class="padding paper-info">
+<form method="post" class="horizontal-padding paper-info">
     {% csrf_token %}
-    <div class="row">
-        <div class="col-lg-6">
-            {{ form.title|as_crispy_field }}
-        </div>
-        <div class="col-lg-6">
-            {{ form.abstract|as_crispy_field }}
-        </div>
-        <div class="col-lg-6">
-            {{ form.authors|as_crispy_field }}
-        </div>
-        <div class="col-lg-6">
-            {{ form.logoUrl|as_crispy_field }}
-        </div>
-        <div class="col-lg-6">
-            {{ form.docUrl|as_crispy_field }}
-        </div>
-        <div class="col-lg-6">
-            <br><button type="submit" class="btn btn-success" onClick="return confirmUpdate()">Update paper</button>
-        </div>
-    </div>
+    {{ form.title|as_crispy_field }}
+    {{ form.abstract|as_crispy_field }}
+    {{ form.authors|as_crispy_field }}
+    {{ form.logoUrl|as_crispy_field }}
+    {{ form.docUrl|as_crispy_field }}
+    All fields with * must be filled.
+    <br><button type="submit" class="btn btn-success" onClick="return confirmUpdate()">Update paper</button>
 </form>
 
 <script LANGUAGE="JavaScript">

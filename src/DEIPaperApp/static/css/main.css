@@ -3,8 +3,12 @@
     color: white;
 }
 
-.padding{
+.horizontal-padding{
     padding: 0% 10%;
+}
+
+.vertical-padding{
+    padding: 0.5% 0%;
 }
 
 .navbar-title-fontsize, h1{
@@ -66,14 +70,10 @@ thead{
 }
 
 img{
-    max-width: max(25vw, 250px);
-    max-height: max(25vw, 250px);
+    max-width: max(25vw, 320px);
+    max-height: max(25vw, 320px);
 }
 
 .center{
     text-align: center;
-}
-
-.upper-padding{
-    padding-top: 1%;
 }

@@ -3,10 +3,10 @@
 {% load crispy_forms_tags %}
 
 <title>DEIPaper - New paper</title>
-<div class="upper-padding">
-    <h1 class="padding"><b>New paper</b></h1>
+<div class="vertical-padding">
+    <h1 class="horizontal-padding"><b>New paper</b></h1>
 </div>
-<form method="post" class="padding paper-info">
+<form method="post" class="horizontal-padding paper-info">
     {% csrf_token %}
     {{ form.title|as_crispy_field }}
     {{ form.abstract|as_crispy_field }}

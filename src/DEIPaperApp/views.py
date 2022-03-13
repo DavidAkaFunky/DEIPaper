@@ -17,7 +17,7 @@ def list_papers(request: HttpRequest, offset = 0, lines = 10) -> HttpResponse:
         page = (offset // lines) + 1 # Get page number to show the user (pages shall start at 1) 
         paper_list = papers.get_papers(lines * (page - 1), lines + 1)    
         papers_len = len(paper_list)
-        if papers_len == 0:
+        if papers_len == 0 and offset != 0:
             # Redirect to offset 0 if for some reason the returned paper list
             # was empty (for example, if the query was manually changed)
             return redirect(f"/DEIPaper/papers/offset=0&lines={lines}") 
@@ -43,7 +43,7 @@ def new_paper(request: HttpRequest) -> HttpResponse:
     """Show a page allowing to add
     a new paper to the ISTPaper system."""
     if request.method == "POST":
-        form = forms.NewPaperForm(request.POST)
+        form = forms.PaperForm(request.POST)
         if form.is_valid():
             try:
                 paper_id = papers.post_paper(form.create_json())
@@ -52,28 +52,14 @@ def new_paper(request: HttpRequest) -> HttpResponse:
             except papers.DEIPaperError as e:
                 return e.show_error(request)
     else:
-        form = forms.NewPaperForm()
+        form = forms.PaperForm()
 
     return render(request, "DEIPaperApp/new_paper.html", {"form": form})
-
-def shorten_abstract(abstract, max = 512):
-    """Auxiliary function which shortens the abstract
-    to a maximum amount of characters (default = 512)."""
-    if len(abstract) == 1:
-        return abstract
-    res = ""
-    for el in abstract.split("."):
-        el += ". "
-        if len(res) + len(el) > max + 1:
-            return res + "(...)"
-        res += el
-    return res[:-1]
 
 def show_paper(request: HttpRequest, paper_id: int) -> HttpResponse:
     """Show a paper from the ISTPaper system given its ID."""
     try:
         paper = papers.get_paper(paper_id)
-        paper["abstract"] = shorten_abstract(paper["abstract"])
         return render(request, "DEIPaperApp/paper.html", {"paper": paper})
     except papers.DEIPaperError as e:
         return e.show_error(request)
@@ -83,24 +69,24 @@ def update_paper(request: HttpRequest, paper_id) -> HttpResponse:
     # Django doesn't natively support PUT requests,
     # so POST had to be used in alternative
     if request.method == "POST":
-        form = forms.UpdatePaperForm(request.POST, paper) # Same as previously mentioned
+        form = forms.PaperForm(request.POST) # Same as previously mentioned
         if form.is_valid():
             try:
-                paper = papers.get_paper(paper_id)
-                form.update_json(paper)
+                paper = form.create_json(paper_id = paper_id)
                 papers.update_paper(paper_id, paper)
                 messages.success(request, f"Paper with the ID {paper_id} updated successfully.")
-                return render(request, "DEIPaperApp/paper.html", {"paper": paper})
+                return redirect(f"/DEIPaper/paper/{paper_id}")
             except papers.DEIPaperError as e:
                 return e.show_error(request)
+    
     else:
-        form = forms.UpdatePaperForm()
-
-    try:
         paper = papers.get_paper(paper_id)
-        return render(request, "DEIPaperApp/update_paper.html", {"form": form, "paper": paper})
-    except papers.DEIPaperError as e:
-        return e.show_error(request)
+        form = forms.PaperForm(initial = paper)
+        try:
+            return render(request, "DEIPaperApp/update_paper.html", {"form": form, "paper": paper})
+        except papers.DEIPaperError as e:
+            return e.show_error(request)
+
 
 def delete_paper(request, paper_id):
     """Delete paper from the
@@ -108,6 +94,6 @@ def delete_paper(request, paper_id):
     try:
         papers.delete_paper(paper_id)
         messages.success(request, f"Paper with ID {paper_id} deleted successfully.")
-        return redirect("/")
+        return redirect("/DEIPaper/papers")
     except papers.DEIPaperError as e:
         return e.show_error(request)

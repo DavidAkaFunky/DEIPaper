@@ -9,7 +9,7 @@
         </head>
         <body class = "page-background">
             <nav class="navbar navbar-dark bg-dark">
-                <div class="container-fluid padding">
+                <div class="container-fluid horizontal-padding">
                     <div class="navbar-header">
                         <a class="navbar-brand navbar-title-fontsize" href="/"><b>DEI Paper</b></a>
                     </div>
@@ -19,17 +19,19 @@
                 </div>
             </nav>
             {% if messages %}
-                {% for message in messages %}
-                    {% if message.tags == "error" %}
-                        <div class="alert alert-danger altert-dismissable fade show" role="alert">
-                            <p>{{message}}</p>
-                        </div>
-                    {% elif message.tags == "success" %}
-                        <div class="alert alert-success altert-dismissable fade show" role="alert">
-                            <p>{{message}}</p>
-                        </div>
-                    {% endif %}
-                {% endfor %}
+                <div class="vertical-padding">
+                    {% for message in messages %}
+                        {% if message.tags == "error" %}
+                            <div class="alert alert-danger altert-dismissable fade show" role="alert">
+                                <p><b>{{message}}</b></p>
+                            </div>
+                        {% elif message.tags == "success" %}
+                            <div class="alert alert-success altert-dismissable fade show" role="alert">
+                                <p><b>{{message}}</b></p>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
             {% endif %}
             {% block content %}
             {% endblock %}
